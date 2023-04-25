@@ -29,7 +29,6 @@ replay_pid*
 
 ### Maven ###
 target/
-web.xml
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
