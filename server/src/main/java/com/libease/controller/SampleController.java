@@ -16,9 +16,9 @@ import com.libease.model.User;
 public class SampleController extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		LibraryManager libManager = new LibraryManager();
-		List<User> users;
 		try {
+			LibraryManager libManager = new LibraryManager();
+			List<User> users;
 			users = libManager.getUsersInfoAll();
 			// JSPにデータを渡す
 			request.setAttribute("userList", users);
