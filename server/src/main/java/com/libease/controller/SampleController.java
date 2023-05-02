@@ -17,7 +17,7 @@ public class SampleController extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			LibraryManager libManager = new LibraryManager();
+			LibraryManager libManager = LibraryManager.getInstance();
 			List<User> users;
 			users = libManager.getUsersInfoAll();
 			// JSPにデータを渡す
