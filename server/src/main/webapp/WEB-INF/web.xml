@@ -22,30 +22,4 @@
     <welcome-file>/view/index.jsp</welcome-file>
   </welcome-file-list>
   <display-name>My App</display-name>
-  
-  <servlet>
-    <servlet-name>ApiGetMessageServlet</servlet-name>
-    <servlet-class>com.libease.controller.ApiGetMessageServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ApiGetMessageServlet</servlet-name>
-    <url-pattern>/api/getMessage</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>ApiServlet</servlet-name>
-    <servlet-class>com.libease.controller.ApiServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ApiServlet</servlet-name>
-    <url-pattern>/api</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>SampleController</servlet-name>
-    <servlet-class>com.libease.controller.SampleController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SampleController</servlet-name>
-    <url-pattern>/samplecontroller</url-pattern>
-  </servlet-mapping>
 </web-app>
