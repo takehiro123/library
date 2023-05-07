@@ -14,7 +14,7 @@ public class LibraryManager {
     private static LibraryManager instance = null;
     private final DataSource dataSource;
 
-    public LibraryManager() {
+    private LibraryManager() {
         // コネクションプールを設定
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setDriverClassName("com.mysql.jdbc.Driver");
