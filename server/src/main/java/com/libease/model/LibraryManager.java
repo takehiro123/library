@@ -10,10 +10,16 @@ import java.util.List;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 
+/*
+ * シングルトンクラスとして定義する
+ */
 public class LibraryManager {
     private static LibraryManager instance = null;
     private final DataSource dataSource;
 
+    /*
+     * コンストラクタを直接コール出来ないようにprivateにする。シングルトンクラスだから
+     */
     private LibraryManager() {
         // コネクションプールを設定
         BasicDataSource basicDataSource = new BasicDataSource();
@@ -23,7 +29,9 @@ public class LibraryManager {
         basicDataSource.setPassword("root");
         dataSource = basicDataSource;
     }
-
+    /*
+     * このクラスを使用するときにはこのメソッドを使ってインスタンスを取得する
+     */
     public static synchronized LibraryManager getInstance() {
         if (instance == null) {
             instance = new LibraryManager();
