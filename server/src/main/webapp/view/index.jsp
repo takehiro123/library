@@ -13,11 +13,14 @@
 
       <body>
         <h2>My app works. index.jsp</h2>
-        <a href='./api'>Try ./api</a>
-        <p><a href="./samplecontroller">Click here</a> to go to the controller.</p>
-        <c:set var="attr" value="${requestScope.userList}" />
-        <c:forEach var="item" items="${attr}">
+        <a href='./api'>Try ./api</a><br>
+        <c:set var="userList" value="${requestScope.userList}" />
+        <c:if test="${empty userList}">
+          <% response.sendRedirect(request.getContextPath() + "/index" ); %>
+        </c:if>
+        <c:forEach var="item" items="${userList}">
           ${item.getId()} : ${item.getName()}<br>
         </c:forEach>
       </body>
+
       </html>

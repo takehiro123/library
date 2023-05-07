@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import com.libease.model.LibraryManager;
 import com.libease.model.User;
 
-@WebServlet(urlPatterns = {"/samplecontroller"})
+@WebServlet(urlPatterns = {"/index"})
 public class SampleController extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
