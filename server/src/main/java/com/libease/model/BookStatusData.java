@@ -4,6 +4,9 @@ public class BookStatusData {
     private Book book = null;
     private String statuts;
 
+    public BookStatusData() {
+    }
+
     public BookStatusData(Book book, String statuts) {
         this.book = book;
         this.statuts = statuts;
@@ -23,5 +26,10 @@ public class BookStatusData {
 
     public void setStatuts(String statuts) {
         this.statuts = statuts;
+    }
+
+    @Override
+    public String toString() {
+        return "BookStatusData [book=" + book + ", statuts=" + statuts + "]";
     }
 }

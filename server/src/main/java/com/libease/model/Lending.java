@@ -28,4 +28,9 @@ public class Lending {
     public void setBookId(int bookId) {
         this.bookId = bookId;
     }
+
+    @Override
+    public String toString() {
+        return "Lending [lendingId=" + lendingId + ", userId=" + userId + ", bookId=" + bookId + "]";
+    }
 }

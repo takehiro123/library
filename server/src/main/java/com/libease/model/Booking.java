@@ -28,4 +28,9 @@ public class Booking {
     public void setBookId(int bookId) {
         this.bookId = bookId;
     }
+
+    @Override
+    public String toString() {
+        return "Booking [bookingId=" + bookingId + ", userId=" + userId + ", bookId=" + bookId + "]";
+    }
 }
