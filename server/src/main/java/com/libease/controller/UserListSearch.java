@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,11 +28,10 @@ public class UserListSearch extends HttpServlet {
 				request.setAttribute("userList", users);
 			}
 			// JSPにリダイレクト
-			RequestDispatcher dispatcher = request.getRequestDispatcher(PathManager.USER_LIST_SERACH);
-			dispatcher.forward(request, response);
+			request.getRequestDispatcher(PathManager.USER_LIST_SERACH).forward(request, response);
 		} catch (SQLException e) {
-			// TODO: handle exception
 			e.printStackTrace();
+			request.getRequestDispatcher(PathManager.ERROR).forward(request, response);
 		}
 	}
 

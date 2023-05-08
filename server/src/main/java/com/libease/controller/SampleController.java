@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpServlet;
 
+import com.libease.common.PathManager;
 import com.libease.model.LibraryManager;
 import com.libease.model.User;
 
@@ -28,8 +29,8 @@ public class SampleController extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("");
 			dispatcher.forward(request, response);
 		} catch (SQLException e) {
-			// TODO: handle exception
 			e.printStackTrace();
+			request.getRequestDispatcher(PathManager.ERROR).forward(request, response);
 		}
 	}
 }
