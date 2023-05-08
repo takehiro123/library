@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-    <a href="${pageContext.request.contextPath}/userListSearch">user_list_search</a>
+    <a href="${pageContext.request.contextPath}/userListSearch">user_list_search</a><br>
+    <a href="${pageContext.request.contextPath}/searchExecution">searchExecution</a>
 </body>
 </html>

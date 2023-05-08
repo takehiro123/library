@@ -110,9 +110,9 @@ public class LibraryManager {
         List<BookStatusData> bookList = new ArrayList<>();
         String sql = "SELECT books.book_id, books.book_name, books.author, " +
                 "CASE " +
-                "WHEN lending.book_id IS NOT NULL THEN '貸出済み' " +
-                "WHEN booking.book_id IS NOT NULL THEN '予約済み' " +
-                "ELSE '予約可能' " +
+                "WHEN lending.book_id IS NOT NULL THEN 'borrowed' " +
+                "WHEN booking.book_id IS NOT NULL THEN 'reserved' " +
+                "ELSE 'available' " +
                 "END AS status " +
                 "FROM books " +
                 "LEFT JOIN lending ON books.book_id = lending.book_id " +
