@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import com.libease.common.PathManager;
 import com.libease.view.SampleView;
 
 @WebServlet(urlPatterns = {"/api"})
@@ -25,8 +26,8 @@ public class ApiServlet extends HttpServlet {
          PrintWriter out = response.getWriter();
          out.println(render);
       } catch (Exception e) {
-         // TODO: handle exception
          e.printStackTrace();
+         request.getRequestDispatcher(PathManager.ERROR).forward(request, response);
       }
    }
 

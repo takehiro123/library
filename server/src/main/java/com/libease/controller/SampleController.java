@@ -22,7 +22,7 @@ public class SampleController extends HttpServlet {
 		try {
 			LibraryManager libManager = LibraryManager.getInstance();
 			List<User> users;
-			users = libManager.getUsersInfoAll();
+			users = libManager.getUsersInfoByQuery(1,"");
 			// JSPにデータを渡す
 			request.setAttribute("userList", users);
 			// JSPにリダイレクト
