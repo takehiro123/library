@@ -1,6 +1,7 @@
 package com.libease.model;
 
 import java.sql.Connection;
+import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,12 +24,13 @@ public class LibraryManager {
     private LibraryManager() {
         // コネクションプールを設定
         BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        basicDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         basicDataSource.setUrl("jdbc:mysql://localhost:3306/testdb");
         basicDataSource.setUsername("root");
         basicDataSource.setPassword("root");
         dataSource = basicDataSource;
     }
+
     /*
      * このクラスを使用するときにはこのメソッドを使ってインスタンスを取得する
      */
@@ -37,6 +39,27 @@ public class LibraryManager {
             instance = new LibraryManager();
         }
         return instance;
+    }
+
+    public List<User> getUsersInfoByQuery(int userId, String userName) throws SQLException {
+        List<User> users = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+                PreparedStatement stmt = conn
+                        .prepareStatement("SELECT * FROM Users WHERE user_id = ? or user_name Like ?")) {
+            // SELECT文を実行
+            stmt.setInt(1, userId);
+            stmt.setString(2, "%" + userName + "%");
+            String sql = stmt.toString();
+            System.out.println("SQL: " + sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("user_id"));
+                user.setName(rs.getString("user_name"));
+                users.add(user);
+            }
+        }
+        return users;
     }
 
     public List<User> getUsersInfoAll() throws SQLException {
@@ -54,7 +77,7 @@ public class LibraryManager {
         }
         return users;
     }
-    
+
     public List<User> getUsersInfo(Integer userId) throws SQLException {
         List<User> users = new ArrayList<>();
         try (Connection conn = dataSource.getConnection();
