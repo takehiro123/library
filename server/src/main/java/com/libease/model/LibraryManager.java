@@ -39,6 +39,33 @@ public class LibraryManager {
         }
         return instance;
     }
+    
+    /**
+     * @param userId
+     * @param userName
+     * @return ユーザー情報
+     * @throws SQLException
+     */
+    public User getUserInfoFromIdAndName(int userId, String userName) throws SQLException {
+        User user = new User();
+        try (Connection conn = dataSource.getConnection();
+                PreparedStatement stmt = conn
+                        .prepareStatement("SELECT * FROM Users WHERE user_name = ? and user_id = ? ORDER BY Users.user_id ASC")) {
+            // SELECT文を実行
+            stmt.setString(1, userName);
+            stmt.setInt(2, userId);
+            // SQL実行ログを出力
+            System.out.println("SQL: " + stmt.toString());
+            // query実行
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                // データセット
+                user.setId(rs.getInt("user_id"));
+                user.setName(rs.getString("user_name"));
+            }
+        }
+        return user;
+    }
 
     /**
      * @param userName
