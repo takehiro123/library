@@ -3,7 +3,6 @@ package com.libease.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpServlet;
 
+import com.libease.common.LibraryCommon;
 import com.libease.common.PathManager;
 import com.libease.model.Book;
 import com.libease.model.BookStatusData;
@@ -20,18 +20,12 @@ public class SearchExecution extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			Optional<Integer> userIdOpt = Optional.ofNullable((Integer) request.getAttribute("ususer_ider"));
 			LibraryController libCon = new LibraryController();
-			if (userIdOpt.isPresent()) {
-				// 検索実行
-				try {
-					List<Book> books = libCon.findReservedBooks(userIdOpt.get());
-					request.setAttribute("books", books);
-				} catch (Exception e) {
-					// スタックトレースを維持したまま再スローする
-					throw new RuntimeException(e);
-				}
-			}
+
+			int userId = LibraryCommon.getUserIdFromSession(request);
+			List<Book> books = libCon.findReservedBooks(userId);
+			request.setAttribute("books", books);
+
 			// リクエストパラメータの取得
 			String bookName = request.getParameter("bookName");
 			String author = request.getParameter("author");
