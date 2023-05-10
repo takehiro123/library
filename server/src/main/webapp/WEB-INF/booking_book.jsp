@@ -11,8 +11,23 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+<!--以下のコードはメッセージを表示するために使用しています。セッションスコープにメッセージがあるかないかを判定しています。-->
+<c:if test="${not empty sessionScope.errorMessage}">
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    ${sessionScope.errorMessage}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <c:remove var="errorMessage" scope="session"/>
+</c:if>
+<c:if test="${not empty sessionScope.successMessage}">
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    ${sessionScope.successMessage}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <c:remove var="successMessage" scope="session"/>
+</c:if>
 <div class="container">
-<script>
+<script>  
 // サーブレットへリクエストを投げる　Postリクエストを投げるときに使用しています。
 function ajaxRequest(url, buttonValue) {
   fetch(url, {
@@ -36,25 +51,36 @@ function ajaxRequest(url, buttonValue) {
   });
 }
 </script>
-
-<!--以下のコードはメッセージを表示するために使用しています。セッションスコープにメッセージがあるかないかを判定しています。-->
-<c:if test="${not empty sessionScope.errorMessage}">
-  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    ${sessionScope.errorMessage}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  <c:remove var="errorMessage" scope="session"/>
-</c:if>
-
-<c:if test="${not empty sessionScope.successMessage}">
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-    ${sessionScope.successMessage}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  <c:remove var="successMessage" scope="session"/>
-</c:if>
 <!--↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓この辺に予約書籍表示処理作っておいてください↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓-->
-
+<hr class ="reservation">
+<h2 class ="reservation">書籍予約画面</h2>
+<p>予約状況</p>
+<table border = "1" width = "100%">
+    <tr>
+        <td>
+            <table border = "1" width = "100%">
+                <tr>
+                    <th>書籍ID</th>
+                    <th>書籍名</th>
+                    <th>著者名</th>
+                    <th>操作</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><button type="submit" class="btn btn-info" name="bookId" value="${bookStatus.getBook().getBookId()}">予約取消</button></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </td>
+    </tr>       
+</table>
 
 
 
@@ -114,7 +140,7 @@ function ajaxRequest(url, buttonValue) {
                                 <td>
                                     <button type="submit" value="${bookStatus.getBook().getBookId()}" 
                                       onclick="ajaxRequest('${pageContext.request.contextPath}/bookingExecutions', this.value)" class="btn btn-info">貸出予約</button>
-                                  </td>
+                                </td>
                             </c:when>
                             <c:when test="${bookStatus.getStatuts() == 'borrowed'}">
                                 <td>貸出済み</td>
