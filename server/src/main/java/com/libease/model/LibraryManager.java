@@ -100,11 +100,11 @@ public class LibraryManager {
     public List<Book> getBookingBooksByUserId(int user_id) throws SQLException {
         List<Book> bookList = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT lending.*, books.book_id, books.book_name, books.author");
-        sb.append(" FROM lending");
-        sb.append(" INNER JOIN books ON lending.book_id = books.book_id");
-        sb.append(" WHERE lending.user_id = ?");
-        sb.append(" ORDER BY lending.lending_id ASC");
+        sb.append("SELECT booking.*, books.book_id, books.book_name, books.author");
+        sb.append(" FROM booking");
+        sb.append(" INNER JOIN books ON booking.book_id = books.book_id");
+        sb.append(" WHERE booking.user_id = ?");
+        sb.append(" ORDER BY booking.booking_id ASC");
         String sql = sb.toString();
         try (Connection conn = dataSource.getConnection();
                 PreparedStatement stmt = conn

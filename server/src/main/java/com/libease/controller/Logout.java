@@ -17,6 +17,8 @@ public class Logout extends HttpServlet {
         try {
             UserController userCon = new UserController();
             userCon.Logout(request);
+            // セッションスコープにエラーメッセージを格納する
+            request.getSession().setAttribute("successMessage", MessageManager.SUCCESS_LOGOUT);
             // JSPにリダイレクト
             response.sendRedirect(request.getContextPath());
         } catch (Exception e) {
